@@ -75,7 +75,7 @@ func (flag *HostConnectFlag) Spec(c *vim25.Client) types.HostConnectSpec {
 
 		if spec.SslThumbprint == "" && flag.noverify {
 			var info object.HostCertificateInfo
-			t := c.Transport.(*http.Transport)
+			t := c.DefaultTransport()
 			_ = info.FromURL(&url.URL{Host: spec.HostName}, t.TLSClientConfig)
 			spec.SslThumbprint = info.ThumbprintSHA1
 		}

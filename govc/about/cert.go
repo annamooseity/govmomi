@@ -99,7 +99,7 @@ func (r *certResult) Write(w io.Writer) error {
 func (cmd *cert) Run(ctx context.Context, f *flag.FlagSet) error {
 	u := cmd.URLWithoutPassword()
 	c := soap.NewClient(u, false)
-	t := c.Client.Transport.(*http.Transport)
+	t := c.DefaultTransport()
 	r := certResult{cmd: cmd}
 
 	if err := cmd.SetRootCAs(c); err != nil {
